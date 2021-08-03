@@ -17,26 +17,23 @@ namespace HelloWorldWebApp.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            teamInfo = new TeamInfo();
+            teamInfo = new TeamInfo
             {
-                Name = "Team2";
-                TeamMembers = new List<string>(new string[] { "Gabriel", "Delia", "Sorina", "Rares", "Catalin" });
+                Name = "Team2",
+                TeamMembers = new List<string>(new string[] { "Gabriel", "Delia", "Sorina", "Rares", "Catalin" })
             };
-
-            teamInfo.Name = "Team2";
-
-            //teamInfo.TeamMembers = new List<string>();
-
         }
+
         [HttpGet]
         public  void AddTeamMembers(string name)
         {
-            return teamInfo.TeamMembers.Add(name);
+            teamInfo.TeamMembers.Add(name);
         }
+
         [HttpGet]
         public int GetCount()
         {
-            return teamInfo.TeamMembers.Add(name);
+            return teamInfo.TeamMembers.Count;
 
         }
         public IActionResult Index()
