@@ -31,12 +31,12 @@ namespace HelloWorldWebApp.Controllers
         [HttpGet]
         public  void AddTeamMembers(string name)
         {
-            teamInfo.TeamMembers.Add(name);
+            return teamInfo.TeamMembers.Add(name);
         }
         [HttpGet]
         public int GetCount()
         {
-            teamInfo.TeamMembers.Add(name);
+            return teamInfo.TeamMembers.Add(name);
 
         }
         public IActionResult Index()
