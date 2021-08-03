@@ -18,24 +18,36 @@ namespace HelloWorldWebApp.Controllers
         {
             _logger = logger;
             teamInfo = new TeamInfo();
+            {
+                Name = "Team2";
+                TeamMembers = new List<string>(new string[] { "Gabriel", "Delia", "Sorina", "Rares", "Catalin" });
+            };
+
             teamInfo.Name = "Team2";
-            teamInfo.TeamMembers = new List<string>();
-            teamInfo.TeamMembers.Add.("Gabriel");
-            teamInfo.TeamMembers.Add.("Delia");
-            teamInfo.TeamMembers.Add.("Sorina");
-            teamInfo.TeamMembers.Add.("Rares");
-            teamInfo.TeamMembers.Add.("Catalin");
+
+            //teamInfo.TeamMembers = new List<string>();
 
         }
+        [HttpGet]
+        public  void AddTeamMembers(string name)
+        {
+            teamInfo.TeamMembers.Add(name);
+        }
+        [HttpGet]
+        public int GetCount()
+        {
+            teamInfo.TeamMembers.Add(name);
 
+        }
         public IActionResult Index()
         {
-            return View();
-        }
+            return View(teamInfo);
+           
+       }
 
         public IActionResult Privacy()
         {
-            return View(teamInfo);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
