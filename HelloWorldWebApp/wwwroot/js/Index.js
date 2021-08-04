@@ -8,7 +8,7 @@ $(document).ready(function () {
             method: "POST",
             data: {
                 name: newcomerName
-            }
+            },
             success: function (result)  {
                 $("#list").append(`<li>${newcomerName}</li>`);
                 $("#nameField").val("");

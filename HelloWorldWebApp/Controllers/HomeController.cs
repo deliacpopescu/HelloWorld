@@ -1,50 +1,43 @@
-﻿// <copyright file="HomeController.cs" company="Principal33">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="HomeController.cs" company="Principal 33">
+// Copyright (c) Principal 33. All rights reserved.
 // </copyright>
 
-using HelloWorldWebApp.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using HelloWorldWebApp.Models;
+using HelloWorldWebApp.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace HelloWorldWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly TeamInfo teamInfo;
+        private readonly ILogger<HomeController> logger;
+        private readonly ITeamService teamService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ITeamService teamService)
         {
-            this._logger = logger;
-            this.teamInfo = new TeamInfo
-            {
-                Name = "Team2",
-                TeamMembers = new List<string>(new string[] { "Gabriel", "Delia", "Sorina", "Rares", "Catalin" })
-            };
+            this.logger = logger;
+            this.teamService = teamService;
         }
 
         [HttpPost]
-        public  void AddTeamMembers(string name)
+        public void AddTeamMember(string teamMember)
         {
-            this.teamInfo.TeamMembers.Add(name);
+            teamService.AddTeamMember(teamMember);
         }
 
         [HttpGet]
         public int GetCount()
         {
-            return this.teamInfo.TeamMembers.Count;
-
+            return teamService.GetTeamInfo().TeamMembers.Count;
         }
+
         public IActionResult Index()
         {
-            return this.View(this.teamInfo);
-           
-       }
+            return this.View(teamService.GetTeamInfo());
+        }
 
         public IActionResult Privacy()
         {
@@ -54,7 +47,7 @@ namespace HelloWorldWebApp.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
     }
 }
