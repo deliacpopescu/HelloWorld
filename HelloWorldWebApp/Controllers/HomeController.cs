@@ -23,9 +23,9 @@ namespace HelloWorldWebApp.Controllers
         }
 
         [HttpPost]
-        public void AddTeamMember(string teamMember)
+        public void AddTeamMember(string teamMemberName)
         {
-            teamService.AddTeamMember(teamMember);
+            teamService.AddTeamMember(teamMemberName);
         }
 
         [HttpGet]

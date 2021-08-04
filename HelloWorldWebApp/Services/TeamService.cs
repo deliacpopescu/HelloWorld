@@ -14,7 +14,7 @@ namespace HelloWorldWebApp.Services
         {
             this.teamInfo = new TeamInfo
             {
-                Name = "Team 3",
+                Name = "Team 2",
                 TeamMembers = new List<string>(new string[]
                {
                     "Gabi",
@@ -22,7 +22,6 @@ namespace HelloWorldWebApp.Services
                     "Sorina",
                     "Rares",
                     "Catalin",
-                    
                }),
             };
         }
@@ -32,9 +31,9 @@ namespace HelloWorldWebApp.Services
             return teamInfo;
         }
 
-        public void AddTeamMember(string name)
+        public void AddTeamMember(string teamMemberName)
         {
-            teamInfo.TeamMembers.Add(name);
+            teamInfo.TeamMembers.Add(teamMemberName);
         }
     }
 }

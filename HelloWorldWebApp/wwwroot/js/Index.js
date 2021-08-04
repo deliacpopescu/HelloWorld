@@ -4,14 +4,18 @@ $(document).ready(function () {
     $("#createButton").click(function () {
         var newcomerName = $("#nameField").val();
         $.ajax({
-            url: "/Home/AddTeamMembers",
             method: "POST",
+            url: "/Home/AddTeamMember",
             data: {
-                name: newcomerName
+                teamMemberName: newcomerName
             },
-            success: function (result)  {
+            success: function (result) {
                 $("#list").append(`<li>${newcomerName}</li>`);
                 $("#nameField").val("");
+            },
+            error: function (err) {
+                console.log(err);
             }
+        })
     })
 });
