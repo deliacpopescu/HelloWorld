@@ -1,4 +1,8 @@
-﻿using HelloWorldWebApp.Models;
+﻿// <copyright file="HomeController.cs" company="Principal33">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+using HelloWorldWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -16,35 +20,35 @@ namespace HelloWorldWebApp.Controllers
 
         public HomeController(ILogger<HomeController> logger)
         {
-            _logger = logger;
-            teamInfo = new TeamInfo
+            this._logger = logger;
+            this.teamInfo = new TeamInfo
             {
                 Name = "Team2",
                 TeamMembers = new List<string>(new string[] { "Gabriel", "Delia", "Sorina", "Rares", "Catalin" })
             };
         }
 
-        [HttpGet]
+        [HttpPost]
         public  void AddTeamMembers(string name)
         {
-            teamInfo.TeamMembers.Add(name);
+            this.teamInfo.TeamMembers.Add(name);
         }
 
         [HttpGet]
         public int GetCount()
         {
-            return teamInfo.TeamMembers.Count;
+            return this.teamInfo.TeamMembers.Count;
 
         }
         public IActionResult Index()
         {
-            return View(teamInfo);
+            return this.View(this.teamInfo);
            
        }
 
         public IActionResult Privacy()
         {
-            return View();
+            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
