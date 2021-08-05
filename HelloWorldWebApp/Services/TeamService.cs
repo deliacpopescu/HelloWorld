@@ -1,8 +1,6 @@
 ﻿using HelloWorldWebApp.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace HelloWorldWebApp.Services
 {
@@ -12,10 +10,13 @@ namespace HelloWorldWebApp.Services
 
         public TeamService()
         {
-                
-            this.teamInfo = new TeamInfo { TeamName = "name", TeamMembers = new List<Member>() { new Member("Gabi", 1), new Member("delia", 2), new Member("Rares", 3), new Member("Catalin", 4) } };
+            teamInfo = new TeamInfo
+            {
+                TeamName = "name",
+                TeamMembers = new List<Member>()
+                    { new Member(1, "Gabi"), new Member(2, "delia"), new Member(3, "Rares"), new Member(4, "Catalin") }
+            };
         }
-        
 
         public TeamInfo GetTeamInfo()
         {
@@ -27,9 +28,10 @@ namespace HelloWorldWebApp.Services
             teamInfo.TeamMembers.Add(member);
         }
 
-        void ITeamService.DeleteTeamMember(Member member)
+        public void DeleteTeamMember(int id)
         {
-            teamInfo.TeamMembers.Remove(member);
+            Member itemToRemove = teamInfo.TeamMembers.Single(r => r.Id == id);
+            teamInfo.TeamMembers.Remove(itemToRemove);
         }
     }
 }

@@ -2,7 +2,6 @@
 // Copyright (c) Principal 33. All rights reserved.
 // </copyright>
 
-using System.Collections.Generic;
 using System.Diagnostics;
 using HelloWorldWebApp.Models;
 using HelloWorldWebApp.Services;
@@ -15,45 +14,31 @@ namespace HelloWorldWebApp.Controllers
     {
         private readonly ILogger<HomeController> logger;
         private readonly ITeamService teamService;
-        private int index;
+
         public HomeController(ILogger<HomeController> logger, ITeamService teamService)
         {
             this.logger = logger;
             this.teamService = teamService;
-            this.index = teamService.GetTeamInfo().TeamMembers.Count;
-        }
-
-        [HttpPost]
-        public void AddTeamMember(string name)
-        {
-            this.index++;
-            Member member = new Member(name, this.index);
-
-            this.teamService.AddTeamMember(member);
-
-        }
-        [HttpPost]
-        public void DeleteTeamMember(int id)
-        {
-            string name ="";
-            foreach(Member m in teamService.GetTeamInfo().TeamMembers)
-            {
-                if (m.Id == id)
-                {
-                    name = m.Name;
-                    break;
-                }
-                Member member = new Member(name, id);
-                this.teamService.DeleteTeamMember(member);
-            }
-
-           
         }
 
         [HttpGet]
         public int GetCount()
         {
-            return teamService.GetTeamInfo().TeamMembers.Count;
+            return this.teamService.GetTeamInfo().TeamMembers.Count;
+        }
+
+        [HttpPost]
+        public Member AddTeamMember(string name)
+        {
+            Member member = new Member(this.teamService.GetTeamInfo().TeamMembers.Count + 1, name);
+            this.teamService.AddTeamMember(member);
+            return member;
+        }
+
+        [HttpDelete]
+        public void DeleteTeamMember(int id)
+        {
+            this.teamService.DeleteTeamMember(id);
         }
 
         public IActionResult Index()

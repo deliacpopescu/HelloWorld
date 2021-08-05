@@ -6,26 +6,28 @@
     <script type="text/javascript" src="~/js/Index.js"></script>
 }
 @section AdditionalStyles {
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+}
+@section styles{
+ <link rel="stylesheet" href="~/css/Styles/StyleSheet.css"/>
 }
 
 <div class="text-center">
     <h1 class="display-4">Our team -Team 2</h1>
-    <ul id="list">
+    <ul id="list" class="p-0 col-10" >
         @for (var i = 0; i < Model.TeamMembers.Count; i++)
         {
-            var member = Model.TeamMembers[i].Name;
+            var member = Model.TeamMembers[i];
 
-            <li id="member" class="member">
-                 <span class="name">@member</span>
-                 <span  class="delete fa fa-remove" onclick="deleteTeamMember"></span>
-                 <span  class="pencil fa fa-pencil"></span>
+            <li id="@member.Id" class="member">
+                 <span class="name">@member.Name</span>
+                 <span id="deleteMember" class="delete fa fa-remove" onclick="deleteMember();"></span>
+                 <span class="pencil fa fa-pencil"></span>
             </li>
 
         }
     </ul>
     <input id="nameField" type="text" title="Name" />
-    <button id="createButton" disabled="disabled" type="submit" class="btn btn-primary" >Add</button>
-    <button id="clear" class="btn btn-danger">Clear</button>
-
+    <button id="createMember" disabled="disabled" type="submit" class="btn btn-primary" >Add</button>
+    <button id="clearNameField" class="btn btn-danger" onclick="clearNameField();">Clear</button>
 </div>

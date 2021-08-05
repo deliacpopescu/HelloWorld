@@ -10,12 +10,12 @@ $(document).ready(function () {
         });
 
         if (empty)
-            $('#createButton').attr('disabled', 'disabled');
+            $('#createMember').attr('disabled', 'disabled');
         else
-            $('#createButton').attr('disabled', false);
+            $('#createMember').attr('disabled', false);
     });
 
-    $("#createButton").click(function () {
+    $("#createMember").click(function () {
         var newcomerName = $("#nameField").val();
         $.ajax({
             method: "POST",
@@ -24,38 +24,16 @@ $(document).ready(function () {
                 "name": newcomerName
             },
             success: function (result) {
-                $("#list").append(`<li>${result}
+                $("#list").append(`
+                <li id=${result.id} class="member">
+                    <span class="name">${result.name}</span>
+                    <span id="deleteMember" onclick="deleteMember();" class="delete fa fa-remove"></span>
+                    <span class="pencil fa fa-pencil"></span>
+                </li>`
 
-                 <span class="name">${newcomerName}</span>
-                 <span  class="delete fa fa-remove" onclick="deleteTeamMember"></span>
-                 <span  class="pencil fa fa-pencil"></span>
-
-                                            </li>`);
+                );
                 $("#nameField").val("");
-                $('#createButton').prop('disabled', true);
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        })
-    })
-
-    $("#clear").click(function () {
-        $("#nameField").val("");
-        $('#createButton').prop('disabled', true);
-    });
-
-    $("#deleteField").click(function () {
-        var newcomerName = $("memberField").val();
-        $.ajax({
-            method: "POST",
-            url: "/Home/DeleteTeamMember",
-            data: {
-                "name": newcomerName
-            },
-            success: function (result) {
-                $("#list").remove(`<li>${newcomerName}</li>`);
-                $("#nameField").val("");
+                $('#createMember').prop('disabled', true);
             },
             error: function (err) {
                 console.log(err);
@@ -63,3 +41,25 @@ $(document).ready(function () {
         })
     })
 });
+
+
+function clearNameField() {
+    $("#nameField").val("");
+    $('#createMember').prop('disabled', true);
+};
+
+function deleteMember() {
+    const parentElement = $("#deleteMember").parent()
+    var id = parentElement.attr('id');
+
+    $.ajax({
+        method: "DELETE",
+        url: `/Home/DeleteTeamMember?id=${id}`,
+        success: function (result) {
+            parentElement.remove();
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    })
+}

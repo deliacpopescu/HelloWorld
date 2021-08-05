@@ -8,7 +8,7 @@ namespace HelloWorldWebApp.Services
 
         TeamInfo GetTeamInfo();
 
-        void DeleteTeamMember(Member member);
+        void DeleteTeamMember(int id);
 
     }
 
