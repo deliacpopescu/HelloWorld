@@ -15,17 +15,38 @@ namespace HelloWorldWebApp.Controllers
     {
         private readonly ILogger<HomeController> logger;
         private readonly ITeamService teamService;
-
+        private int index;
         public HomeController(ILogger<HomeController> logger, ITeamService teamService)
         {
             this.logger = logger;
             this.teamService = teamService;
+            this.index = teamService.GetTeamInfo().TeamMembers.Count;
         }
 
         [HttpPost]
-        public void AddTeamMember(string teamMemberName)
+        public void AddTeamMember(string name)
         {
-            teamService.AddTeamMember(teamMemberName);
+            this.index++;
+            Member member = new Member(name, this.index);
+
+            this.teamService.AddTeamMember(member);
+        }
+        [HttpPost]
+        public void DeleteTeamMember(int id)
+        {
+            string name="";
+            foreach(Member m in teamService.GetTeamInfo().TeamMembers)
+            {
+                if (m.Id == id)
+                {
+                    name = m.Name;
+                    break;
+                }
+                Member member = new Member(name, id);
+                this.teamService.DeleteTeamMember(member);
+            }
+
+           
         }
 
         [HttpGet]

@@ -7,10 +7,28 @@ $(document).ready(function () {
             method: "POST",
             url: "/Home/AddTeamMember",
             data: {
-                teamMemberName: newcomerName
+                "name": newcomerName
             },
             success: function (result) {
                 $("#list").append(`<li>${newcomerName}</li>`);
+                $("#nameField").val("");
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    })
+
+    $("#deleteField").click(function () {
+        var newcomerName = $("#nameField").val();
+        $.ajax({
+            method: "POST",
+            url: "/Home/AddTeamMember",
+            data: {
+                "name": newcomerName
+            },
+            success: function (result) {
+                $("#list").remove(`<li>${newcomerName}</li>`);
                 $("#nameField").val("");
             },
             error: function (err) {

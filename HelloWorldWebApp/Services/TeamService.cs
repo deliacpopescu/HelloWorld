@@ -12,28 +12,23 @@ namespace HelloWorldWebApp.Services
 
         public TeamService()
         {
-            this.teamInfo = new TeamInfo
-            {
-                Name = "Team 2",
-                TeamMembers = new List<string>(new string[]
-               {
-                    "Gabi",
-                    "Delia",
-                    "Sorina",
-                    "Rares",
-                    "Catalin",
-               }),
-            };
+                this.teamInfo = new TeamInfo { TeamName = "name", TeamMembers = new List<Member>() { new Member("Gabi", 1), new Member("delia", 2), new Member("Rares", 3), new Member("Catalin", 4) } };
         }
+        
 
         public TeamInfo GetTeamInfo()
         {
             return teamInfo;
         }
 
-        public void AddTeamMember(string teamMemberName)
+        public void AddTeamMember(Member member)
         {
-            teamInfo.TeamMembers.Add(teamMemberName);
+            teamInfo.TeamMembers.Add(member);
+        }
+
+        void ITeamService.DeleteTeamMember(Member member)
+        {
+            teamInfo.TeamMembers.Remove(member);
         }
     }
 }
