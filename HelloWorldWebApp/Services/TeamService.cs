@@ -12,7 +12,8 @@ namespace HelloWorldWebApp.Services
 
         public TeamService()
         {
-                this.teamInfo = new TeamInfo { TeamName = "name", TeamMembers = new List<Member>() { new Member("Gabi", 1), new Member("delia", 2), new Member("Rares", 3), new Member("Catalin", 4) } };
+                
+            this.teamInfo = new TeamInfo { TeamName = "name", TeamMembers = new List<Member>() { new Member("Gabi", 1), new Member("delia", 2), new Member("Rares", 3), new Member("Catalin", 4) } };
         }
         
 

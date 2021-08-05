@@ -16,18 +16,16 @@
         {
             var member = Model.TeamMembers[i].Name;
 
-        <li class="member">
-            <span class="name">@member</span>
-            <button id="deleteField">
-                <span  class="delete fa fa-remove"></span>
-            </button>
-            
-            <span id="editField" class="pencil fa fa-pencil"></span>
-        </li>
+            <li id="member" class="member">
+                 <span class="name">@member</span>
+                 <span  class="delete fa fa-remove" onclick="deleteTeamMember"></span>
+                 <span  class="pencil fa fa-pencil"></span>
+            </li>
 
         }
     </ul>
     <input id="nameField" type="text" title="Name" />
-    <button type="submit" class="btn-danger" id="createButton">Add</button>
+    <button id="createButton" disabled="disabled" type="submit" class="btn btn-primary" >Add</button>
+    <button id="clear" class="btn btn-danger">Clear</button>
 
 </div>

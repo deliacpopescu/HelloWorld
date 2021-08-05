@@ -30,11 +30,12 @@ namespace HelloWorldWebApp.Controllers
             Member member = new Member(name, this.index);
 
             this.teamService.AddTeamMember(member);
+
         }
         [HttpPost]
         public void DeleteTeamMember(int id)
         {
-            string name="";
+            string name ="";
             foreach(Member m in teamService.GetTeamInfo().TeamMembers)
             {
                 if (m.Id == id)
