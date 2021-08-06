@@ -7,13 +7,15 @@ namespace HelloWorldWebApp.Models
 {
     public class Member
     {
-        public Member(int id, string name)
+        public Member(string name, int id = 0)
         {
             this.Id = id;
             this.Name = name;
         }
-        public string Name { get; set; }
+
         public int Id { get; set; }
+
+        public string Name { get; set; }
 
 
     }

@@ -4,9 +4,11 @@ namespace HelloWorldWebApp.Services
 {
     public interface ITeamService
     {
-        void AddTeamMember(Member member);
-
         TeamInfo GetTeamInfo();
+
+        Member AddTeamMember(Member member);
+
+        Member UpdateTeamMember(Member member);
 
         void DeleteTeamMember(int id);
 

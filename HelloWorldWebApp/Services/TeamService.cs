@@ -14,7 +14,7 @@ namespace HelloWorldWebApp.Services
             {
                 TeamName = "name",
                 TeamMembers = new List<Member>()
-                    { new Member(1, "Gabi"), new Member(2, "delia"), new Member(3, "Rares"), new Member(4, "Catalin") }
+                    { new Member("Gabi", 1), new Member("delia", 2), new Member("Rares", 3), new Member("Catalin", 4) }
             };
         }
 
@@ -23,15 +23,26 @@ namespace HelloWorldWebApp.Services
             return teamInfo;
         }
 
-        public void AddTeamMember(Member member)
+        public Member AddTeamMember(Member member)
         {
+            int id = teamInfo.TeamMembers.Max(member => member.Id);
+            member.Id = id + 1;
             teamInfo.TeamMembers.Add(member);
+            return member;
+        }
+
+        public Member UpdateTeamMember(Member member)
+        {
+            // List<Member> teamMembers = teamInfo.TeamMembers.Select(r => { if (r.Id == member.Id) { r = member; }; return r; }).ToList();
+            // teamInfo.TeamMembers = teamMembers;
+            teamInfo.TeamMembers.ForEach(r => { if (r.Id == member.Id) { r.Name = member.Name; }; });
+            return member;
         }
 
         public void DeleteTeamMember(int id)
         {
-            Member itemToRemove = teamInfo.TeamMembers.Single(r => r.Id == id);
-            teamInfo.TeamMembers.Remove(itemToRemove);
+            Member member = teamInfo.TeamMembers.Single(r => r.Id == id);
+            teamInfo.TeamMembers.Remove(member);
         }
     }
 }

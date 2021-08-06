@@ -25,12 +25,11 @@ $(document).ready(function () {
             },
             success: function (result) {
                 $("#list").append(`
-                <li id=${result.id} class="member">
+                <li class="member" data-member-id=${result.id}>
                     <span class="name">${result.name}</span>
-                    <span id="deleteMember" onclick="deleteMember();" class="delete fa fa-remove"></span>
+                    <span class="delete fa fa-remove"></span>
                     <span class="pencil fa fa-pencil"></span>
                 </li>`
-
                 );
                 $("#nameField").val("");
                 $('#createMember').prop('disabled', true);
@@ -39,48 +38,62 @@ $(document).ready(function () {
                 console.log(err);
             }
         })
-    })
+    });
+
+    $("#clearNameField").click(function () {
+        $("#nameField").val("");
+        $('#createMember').prop('disabled', true);
+    });
 
     $('#editClassmate  #submit').click(function () {
         console.log("clicked");
-    })
+    });
 
     $("#list").on("click", ".pencil", function () {
-
         var targetMemberTag = $(this).closest('li');
-
         var id = targetMemberTag.attr('data-member-id');
-
         var currentName = targetMemberTag.find(".name").text();
 
         $('#editClassmate').attr("data-member-id", id);
-
         $('#classmateName').val(currentName);
-
         $('#editClassmate').modal('show');
-    })
+    });
 
+    $("#editClassmate").on("click", "#submit", function () {
+        var name = $("#classmateName").val();
+        var id = $('#editClassmate').attr('data-member-id');
 
+        $.ajax({
+            method: "PUT",
+            url: "/Home/UpdateTeamMember",
+            data: {
+                "id": id,
+                "name": name
+            },
+            success: function (result) {
+                console.log('Succsesful renamed: ${id}')
+                location.reload();
+            }
+        })
+    });
+
+    $("#editClassmate").on("click", "#cancel", function () {
+        console.log('cancel changes');
+    });
+
+    $("#list").on("click", ".delete", function () {
+        const targetMemberTag = $(this).closest('li');
+        var id = targetMemberTag.attr('data-member-id');
+
+        $.ajax({
+            method: "DELETE",
+            url: `/Home/DeleteTeamMember?id=${id}`,
+            success: function (result) {
+                targetMemberTag.remove();
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    });
 });
-
-
-function clearNameField() {
-    $("#nameField").val("");
-    $('#createMember').prop('disabled', true);
-};
-
-function deleteMember() {
-    const parentElement = $("#deleteMember").parent()
-    var id = parentElement.attr('id');
-
-    $.ajax({
-        method: "DELETE",
-        url: `/Home/DeleteTeamMember?id=${id}`,
-        success: function (result) {
-            parentElement.remove();
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    })
-}

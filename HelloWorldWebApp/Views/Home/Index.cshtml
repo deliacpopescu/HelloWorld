@@ -13,14 +13,10 @@
 }
 
 @section ModalWindow {
-
         <!-- Modal -->
-
         <div class="modal fade" id="editClassmate" role="dialog">
-
             <div class="modal-dialog">
                 <!-- Modal content-->
-
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -39,20 +35,19 @@
                 </div>
             </div>
         </div>
-
-    
 }
 
 <div class="text-center">
     <h1 class="display-4">Our team -Team 2</h1>
     <ul id="list" class="p-0 col-10">
+
         @for (var i = 0; i < Model.TeamMembers.Count; i++)
         {
             var member = Model.TeamMembers[i];
 
-            <li id="@member.Id" class="member" data-member-id="@member.Id">
+            <li class="member" data-member-id="@member.Id">
                 <span class="name">@member.Name</span>
-                <span id="deleteMember" class="delete fa fa-remove" onclick="deleteMember();"></span>
+                <span class="delete fa fa-remove"></span>
                 <span class="pencil fa fa-pencil"></span>
             </li>
 
@@ -60,5 +55,5 @@
     </ul>
     <input id="nameField" type="text" title="Name" />
     <button id="createMember" disabled="disabled" type="submit" class="btn btn-primary">Add</button>
-    <button id="clearNameField" class="btn btn-danger" onclick="clearNameField();">Clear</button>
+    <button id="clearNameField" class="btn btn-danger">Clear</button>
 </div>

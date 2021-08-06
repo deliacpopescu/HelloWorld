@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Diagnostics;
+using System.Linq;
 using HelloWorldWebApp.Models;
 using HelloWorldWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -30,8 +31,17 @@ namespace HelloWorldWebApp.Controllers
         [HttpPost]
         public Member AddTeamMember(string name)
         {
-            Member member = new Member(this.teamService.GetTeamInfo().TeamMembers.Count + 1, name);
-            this.teamService.AddTeamMember(member);
+            Member member = new Member(name);
+            member = this.teamService.AddTeamMember(member);
+            return member;
+        }
+
+
+        [HttpPut]
+        public Member UpdateTeamMember(int id, string name)
+        {
+            Member member = new Member(name, id);
+            member = this.teamService.UpdateTeamMember(member);
             return member;
         }
 
