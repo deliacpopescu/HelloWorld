@@ -40,6 +40,27 @@ $(document).ready(function () {
             }
         })
     })
+
+    $('#editClassmate  #submit').click(function () {
+        console.log("clicked");
+    })
+
+    $("#list").on("click", ".pencil", function () {
+
+        var targetMemberTag = $(this).closest('li');
+
+        var id = targetMemberTag.attr('data-member-id');
+
+        var currentName = targetMemberTag.find(".name").text();
+
+        $('#editClassmate').attr("data-member-id", id);
+
+        $('#classmateName').val(currentName);
+
+        $('#editClassmate').modal('show');
+    })
+
+
 });
 
 
