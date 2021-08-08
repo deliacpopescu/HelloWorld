@@ -14,7 +14,7 @@ namespace HelloWorldWebApp.Services
             {
                 TeamName = "name",
                 TeamMembers = new List<Member>()
-                    { new Member("Gabi", 1), new Member("delia", 2), new Member("Rares", 3), new Member("Catalin", 4) }
+                    { new Member("Gabi", 1), new Member("Delia", 2), new Member("Rares", 3), new Member("Catalin", 4) }
             };
         }
 

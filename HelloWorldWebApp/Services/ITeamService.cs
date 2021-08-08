@@ -11,7 +11,6 @@ namespace HelloWorldWebApp.Services
         Member UpdateTeamMember(Member member);
 
         void DeleteTeamMember(int id);
-
     }
 
 }

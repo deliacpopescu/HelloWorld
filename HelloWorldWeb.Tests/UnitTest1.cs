@@ -15,7 +15,7 @@ namespace HelloWorldWeb.Tests
 
             // Act
 
-            teamService.AddTeamMember(new Member(5, "George"));
+            teamService.AddTeamMember(new Member("George", 5));
 
             // Assert
 
@@ -39,6 +39,24 @@ namespace HelloWorldWeb.Tests
 
             Assert.False(teamService.GetTeamInfo().TeamMembers.Exists(r => r.Id == 2));
             Assert.Equal(count - 1 , teamService.GetTeamInfo().TeamMembers.Count);
+
+        }
+
+        [Fact]
+        public void UpdateTeamMember()
+        {
+            // Assume
+            ITeamService teamService = new TeamService();
+            Member member = new Member("Anna", 2);
+
+            // Act
+
+            teamService.UpdateTeamMember(member);
+
+            // Assert
+
+            Assert.Equal( "Anna", teamService.GetTeamInfo().TeamMembers[1].Name);
+           
 
         }
     }
