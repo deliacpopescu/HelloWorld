@@ -4,6 +4,12 @@
 		<UserSecretsId>d8b731f3-b945-4771-9be3-28c314b5cc2d</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="Controllers\NewFolder\**" />
+	  <Content Remove="Controllers\NewFolder\**" />
+	  <EmbeddedResource Remove="Controllers\NewFolder\**" />
+	  <None Remove="Controllers\NewFolder\**" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="..\.editorconfig" Link=".editorconfig" />
@@ -16,5 +22,6 @@
     	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.8" />
     	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.8" />
     	<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
+    	<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   	</ItemGroup>
 </Project>

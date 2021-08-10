@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WebApplication1.Models;
 
 namespace HelloWorldWebApp.Data
 {
@@ -12,5 +13,6 @@ namespace HelloWorldWebApp.Data
             : base(options)
         {
         }
+        public DbSet<WebApplication1.Models.Skill> Skill { get; set; }
     }
 }
