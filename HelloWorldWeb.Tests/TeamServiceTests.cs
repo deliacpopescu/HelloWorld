@@ -5,8 +5,10 @@ using Xunit;
 
 namespace HelloWorldWeb.Tests
 {
-    public class TeamServiceTest
+    public class TeamServiceTests
     {
+        private ITimeService timeService;
+
         [Fact]
         public void AddTeamMember()
         {
@@ -18,7 +20,7 @@ namespace HelloWorldWeb.Tests
 
             // Act
 
-            teamService.AddTeamMember(new Member("George"));
+            teamService.AddTeamMember(new Member("George", timeService));
 
             // Assert
 
@@ -38,7 +40,7 @@ namespace HelloWorldWeb.Tests
 
             // Act
 
-            teamService.AddTeamMember(new Member("Mike", 8));
+            teamService.AddTeamMember(new Member(8, "Mike", timeService));
 
             // Assert
 
@@ -53,7 +55,7 @@ namespace HelloWorldWeb.Tests
         {
             // Assume
             ITeamService teamService = new TeamService();
-            Member member = new Member("Anna", 2);
+            Member member = new Member(2, "Anna", timeService);
 
             // Act
 
@@ -72,7 +74,7 @@ namespace HelloWorldWeb.Tests
             // Assume
             ITeamService teamService = new TeamService();
             TeamInfo teamInfo = teamService.GetTeamInfo();
-            Member member = new Member("Anna", 100);
+            Member member = new Member(100, "Anna", timeService);
 
             // Act
 
@@ -102,5 +104,7 @@ namespace HelloWorldWeb.Tests
             Assert.Equal(count - 1 , teamService.GetTeamInfo().TeamMembers.Count);
 
         }
+
+      
     }
 }

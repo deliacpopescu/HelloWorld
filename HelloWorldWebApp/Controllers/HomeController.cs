@@ -15,11 +15,14 @@ namespace HelloWorldWebApp.Controllers
     {
         private readonly ILogger<HomeController> logger;
         private readonly ITeamService teamService;
+        private readonly ITimeService timeService;
 
-        public HomeController(ILogger<HomeController> logger, ITeamService teamService)
+        public HomeController(ILogger<HomeController> logger, ITeamService teamService, ITimeService timeService)
         {
             this.logger = logger;
             this.teamService = teamService;
+            this.timeService = timeService;
+
         }
 
         [HttpGet]
@@ -31,7 +34,7 @@ namespace HelloWorldWebApp.Controllers
         [HttpPost]
         public Member AddTeamMember(string name)
         {
-            Member member = new Member(name);
+            Member member = new Member(name, timeService);
             member = this.teamService.AddTeamMember(member);
             return member;
         }
@@ -40,7 +43,7 @@ namespace HelloWorldWebApp.Controllers
         [HttpPut]
         public Member UpdateTeamMember(int id, string name)
         {
-            Member member = new Member(name, id);
+            Member member = new Member(id, name, timeService);
             member = this.teamService.UpdateTeamMember(member);
             return member;
         }
