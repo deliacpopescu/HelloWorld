@@ -98,7 +98,7 @@ namespace HelloWorldWeb.Tests
 
             // Assert
 
-            Assert.True(teamService.GetTeamInfo().TeamMembers.Exists(r => r.Id == 2));
+            Assert.False(teamService.GetTeamInfo().TeamMembers.Exists(r => r.Id == 2));
             Assert.Equal(count - 1 , teamService.GetTeamInfo().TeamMembers.Count);
 
         }
