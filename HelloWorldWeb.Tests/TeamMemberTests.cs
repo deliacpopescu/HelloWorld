@@ -14,7 +14,7 @@ namespace HelloWorldWeb.Tests
     {
         
         private Mock<IteamService> timeMock;
-       
+        private IteamService timeService;
 
         private void InitializeTimeServiceMock()
         {
@@ -34,11 +34,11 @@ namespace HelloWorldWeb.Tests
            
             // Act
 
-            int age = newTeamMember.GetAge(); 
+            int age = newTeamMember.GetAge();
 
             // Assert
 
-        
+            timeMock.Verify(library => library.Now(), Times.AtMostOnce());
             Assert.Equal(30,age);
 
         }
