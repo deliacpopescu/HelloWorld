@@ -4,7 +4,7 @@ namespace HelloWorldWebApp.Services
 {
     public interface ITimeService
     {
-         Now();
+        public DateTime Now();
 
     }
 }
