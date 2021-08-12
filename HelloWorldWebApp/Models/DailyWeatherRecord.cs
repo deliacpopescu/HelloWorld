@@ -7,11 +7,11 @@ namespace HelloWorldWebApp.Models
 {
     public class DailyWeatherRecord
     {
-        public DailyWeatherRecord(DateTime Day, float Temperature, WeatherType Type)
+        public DailyWeatherRecord(DateTime day, float temperature, WeatherType type)
         {
-            this.Day = Day;
-            this.Temperature = Temperature;
-            this.Type = Type;
+            this.Day = day;
+            this.Temperature = temperature;
+            this.Type = type;
         }
 
         public DateTime Day { get; set; }

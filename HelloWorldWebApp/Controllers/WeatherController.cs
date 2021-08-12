@@ -1,5 +1,6 @@
 ﻿using HelloWorldWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -29,17 +30,51 @@ namespace HelloWorldWebApp.Controllers
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
-            return ConvertResponseToWeatherForecastList(response.Content);
+            return ConvertResponseToWeatherRecordList(response.Content);
 
            
         }
 
-        private IEnumerable<DailyWeatherRecord> ConvertResponseToWeatherForecastList(string content)
+        public IEnumerable<DailyWeatherRecord> ConvertResponseToWeatherRecordList(string content)
         {
-            return new DailyWeatherRecord[] {
-                new DailyWeatherRecord(new DateTime(2021, 8, 08), 22.0F, WeatherType.Mild),
-                new DailyWeatherRecord(new DateTime(2021, 8, 08), 22.0F, WeatherType.Mild),
-                    };
+            var json = JObject.Parse(content);
+
+            List<DailyWeatherRecord> result = new List<DailyWeatherRecord>();
+
+            var jsonArray = json["daily"].Take(7);
+
+            foreach (var item in jsonArray)
+            {
+                // TODO: - convert item to DailyWeatherRecord
+                DailyWeatherRecord dailyWeatherRecord = new DailyWeatherRecord(new DateTime(2021, 8, 08), 22.0F, WeatherType.Mild);
+                long unixDateTime= item.Value<long>("dt");
+
+                dailyWeatherRecord.Day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
+                result.Add(dailyWeatherRecord);
+
+                float temperature = item.SelectToken("temp").Value<float>("day");
+                dailyWeatherRecord.Temperature = temperature;
+
+                string weather = item.SelectToken("weather")[0].Value<string>("description");
+                dailyWeatherRecord.Type = Convert(weather);
+
+            }
+
+            return result;
+        }
+
+        private WeatherType Convert(string weather)
+        {
+            switch (weather)
+            {
+                case "few clouds":
+                        return WeatherType.FewClouds;
+                case "light rain":
+                    return WeatherType.LightRain; ;
+
+                default:
+                    throw new Exception($"Unknown weather type {weather}.");
+            }
         }
 
         // GET api/<WeatherController>/5
