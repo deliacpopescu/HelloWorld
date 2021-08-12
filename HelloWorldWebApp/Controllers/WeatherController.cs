@@ -14,12 +14,17 @@ namespace HelloWorldWebApp.Controllers
     [ApiController]
     public class WeatherController : ControllerBase
     {
-        
+        private readonly object latitude = "46.7700";
+        private readonly object longitude = "23.5800";
+        private readonly object apiKey = "14cd0691c3f83a08af36b95d6c3cff18";
+
 
         // GET: api/<WeatherController>
         [HttpGet]
         public IEnumerable<DailyWeatherRecord> Get()
         {
+            //lat 46.7700 lon 23.5800
+            // https://api.openweathermap.org/data/2.5/onecall?lat=46.7700&lon=23.5800&exclude=hourly,minutely&appid=14cd0691c3f83a08af36b95d6c3cff18
             var client = new RestClient($"https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&exclude=hourly,minutely&appid={apiKey}");
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
