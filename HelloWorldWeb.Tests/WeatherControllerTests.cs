@@ -1,5 +1,7 @@
 ﻿using HelloWorldWebApp.Controllers;
 using HelloWorldWebApp.Models;
+using HelloWorldWebApp.Services;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,14 @@ using Xunit;
 
 namespace HelloWorldWeb.Tests
 {
-    public class WeatherControllerTests
+    public class WeatherControllerTests 
     {
-      
+        private IWeatherService weatherService;
+
+        private void InitializeWeatherService()
+        {
+            weatherService = new WeatherService();
+        }
 
         [Fact]
         public void TestMethodConversion()
@@ -29,6 +36,23 @@ namespace HelloWorldWeb.Tests
             Assert.Equal(new DateTime(2021, 8, 12), firstDay.Day);
             Assert.Equal(297.88f, firstDay.Temperature);
             Assert.Equal(WeatherType.FewClouds, firstDay.Type);
+        }
+
+        [Fact]
+        public void KelvinToCelsiusConversion()
+        {
+            //Assume
+            InitializeWeatherService();
+            float kelvinTemp = 298.15F;
+            float expectedTemp = 25F;
+
+            //Act
+
+            float actualTemp = weatherService.KelvinToCelsiusConvert(kelvinTemp);
+
+            //Assert
+            Assert.Equal(actualTemp, expectedTemp);
+
         }
     }
 }

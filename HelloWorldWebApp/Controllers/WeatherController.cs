@@ -54,6 +54,7 @@ namespace HelloWorldWebApp.Controllers
 
                 float temperature = item.SelectToken("temp").Value<float>("day");
                 dailyWeatherRecord.Temperature = temperature;
+                
 
                 string weather = item.SelectToken("weather")[0].Value<string>("description");
                 dailyWeatherRecord.Type = Convert(weather);
