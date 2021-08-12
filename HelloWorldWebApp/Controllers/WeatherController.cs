@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HelloWorldWebApp.Models;
+using Microsoft.AspNetCore.Mvc;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +14,27 @@ namespace HelloWorldWebApp.Controllers
     [ApiController]
     public class WeatherController : ControllerBase
     {
+        
+
         // GET: api/<WeatherController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<DailyWeatherRecord> Get()
         {
-            return new string[] { "value1", "value2" };
+            var client = new RestClient($"https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&exclude=hourly,minutely&appid={apiKey}");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            IRestResponse response = client.Execute(request);
+            return ConvertResponseToWeatherForecastList(response.Content);
+
+           
+        }
+
+        private IEnumerable<DailyWeatherRecord> ConvertResponseToWeatherForecastList(string content)
+        {
+            return new DailyWeatherRecord[] {
+                new DailyWeatherRecord(new DateTime(2021, 8, 08), 22.0F, WeatherType.Mild),
+                new DailyWeatherRecord(new DateTime(2021, 8, 08), 22.0F, WeatherType.Mild),
+                    };
         }
 
         // GET api/<WeatherController>/5
@@ -26,22 +44,6 @@ namespace HelloWorldWebApp.Controllers
             return "value";
         }
 
-        // POST api/<WeatherController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<WeatherController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<WeatherController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+      
     }
 }
