@@ -8,5 +8,6 @@ namespace HelloWorldWebApp.Services
     public interface IWeatherService
     {
         public float KelvinToCelsiusConvert(float kelvinTemp);
+
     }
 }

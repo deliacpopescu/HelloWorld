@@ -4,6 +4,7 @@
 
 namespace HelloWorldWebApp
 {
+using HelloWorldWebApp.Controllers;
     using HelloWorldWebApp.Data;
     using HelloWorldWebApp.Services;
     using Microsoft.AspNetCore.Builder;
@@ -19,6 +20,7 @@ namespace HelloWorldWebApp
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
+          
         }
 
         public IConfiguration Configuration { get; }
@@ -35,6 +37,7 @@ namespace HelloWorldWebApp
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddControllersWithViews();
+            services.AddSingleton<IWeatherControllerSettings, WeatherControllerSettings>();
             services.AddSingleton<ITeamService>(new TeamService());
             services.AddSingleton<ITimeService>(new TimeService());
             services.AddSingleton<IWeatherService>(new WeatherService());

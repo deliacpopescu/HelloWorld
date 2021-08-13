@@ -15,9 +15,18 @@ namespace HelloWorldWebApp.Controllers
     [ApiController]
     public class WeatherController : ControllerBase
     {
-        private readonly object latitude = "46.7700";
-        private readonly object longitude = "23.5800";
-        private readonly object apiKey = "14cd0691c3f83a08af36b95d6c3cff18";
+        private readonly string longitude = "23.5800";
+        private readonly string latitude = "46.7700";
+        private readonly string apiKey = "c39de899f75ef4e85f748679a0126376";
+
+        public WeatherController(IWeatherControllerSettings conf)
+        {
+            longitude = conf.Longitude;
+            latitude = conf.Latitude;
+            apiKey = conf.ApiKey;
+        }
+
+       
 
 
         // GET: api/<WeatherController>
