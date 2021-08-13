@@ -42,14 +42,7 @@ namespace HelloWorldWebApp.Controllers
             List<DailyWeatherRecord> result = new List<DailyWeatherRecord>();
 
             var jsonArray = json["daily"].Take(7);
-
-            foreach (var item in jsonArray)
-            {
-                DailyWeatherRecord dailyWeatherRecord = CreateDailyWeatherRecordFromJToken(item);
-                result.Add(dailyWeatherRecord);
-
-            }
-
+            result.AddRange(jsonArray.Select(CreateDailyWeatherRecordFromJToken));
             return result;
         }
 
