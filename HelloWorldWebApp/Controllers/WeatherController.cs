@@ -39,7 +39,7 @@ namespace HelloWorldWebApp.Controllers
         {
             var json = JObject.Parse(content);
 
-            List<DailyWeatherRecord> result = new List<DailyWeatherRecord>();
+            //List<DailyWeatherRecord> result = new List<DailyWeatherRecord>();
 
             var jsonArray = json["daily"].Take(7);
             return jsonArray.Select(CreateDailyWeatherRecordFromJToken);
