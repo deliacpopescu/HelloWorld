@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace HelloWorldWebApp.Controllers
 {
+    /// <summary>
+    /// fetch data from weather API.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class WeatherController : ControllerBase
