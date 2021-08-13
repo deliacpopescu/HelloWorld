@@ -45,8 +45,8 @@ namespace HelloWorldWebApp.Controllers
 
             foreach (var item in jsonArray)
             {
-                // TODO: - convert item to DailyWeatherRecord
-                DailyWeatherRecord dailyWeatherRecord = new DailyWeatherRecord(new DateTime(2021, 8, 08), 22.0F, WeatherType.Mild);
+
+                DailyWeatherRecord dailyWeatherRecord = new DailyWeatherRecord();
                 long unixDateTime= item.Value<long>("dt");
 
                 dailyWeatherRecord.Day = DateTimeOffset.FromUnixTimeSeconds(unixDateTime).DateTime.Date;
