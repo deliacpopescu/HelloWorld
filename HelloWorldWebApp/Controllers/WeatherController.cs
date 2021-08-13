@@ -42,8 +42,7 @@ namespace HelloWorldWebApp.Controllers
             List<DailyWeatherRecord> result = new List<DailyWeatherRecord>();
 
             var jsonArray = json["daily"].Take(7);
-            result.AddRange(jsonArray.Select(CreateDailyWeatherRecordFromJToken));
-            return result;
+            return jsonArray.Select(CreateDailyWeatherRecordFromJToken);
         }
 
         private DailyWeatherRecord CreateDailyWeatherRecordFromJToken(JToken item)
