@@ -6,7 +6,8 @@
     <members>
         <member name="T:HelloWorldWebApp.Controllers.WeatherController">
             <summary>
-            fetch data from weather API.
+            fetch data from weather API. https://openweathermap.org/api
+            <see href="https://github.com">GitHub</see>
             </summary>
         </member>
     </members>
