@@ -29,9 +29,6 @@ namespace HelloWorldWebApp.Controllers
             apiKey = conf.ApiKey;
         }
 
-       
-
-
         // GET: api/<WeatherController>
         [HttpGet]
         public IEnumerable<DailyWeatherRecord> Get()
@@ -92,8 +89,15 @@ namespace HelloWorldWebApp.Controllers
         }
 
         // GET api/<WeatherController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{index}")]
+        
+        /// <summary>
+        /// Get a weather forecast for the day in specified amount of days from now.
+        /// </summary>
+        /// <param name="index">amount of days from now (from 0 to 7).</param>
+        /// <returns>The weather forecast.</returns>
+        
+        public string Get(int index)
         {
             return "value";
         }
