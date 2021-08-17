@@ -31,19 +31,20 @@ namespace HelloWorldWebApp.Services
             _context.SaveChanges();
             return member.Id;
         }
-       
-        public void DeleteTeamMember(int id)
-        {
-
-            var member = _context.Members.Find(id);
-            _context.Members.Remove(member);
-            _context.SaveChanges();
-            
-        }
 
         public Member UpdateTeamMember(Member member)
         {
-            throw new NotImplementedException();
+            _context.Members.Update(member);
+            _context.SaveChanges();
+            return member;
+        }
+
+        public void DeleteTeamMember(int id)
+        {
+
+            Member member = _context.Members.Find(id);
+            _context.Members.Remove(member);
+            _context.SaveChanges();
         }
     }
 }
