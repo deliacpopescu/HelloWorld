@@ -25,8 +25,8 @@ $(document).ready(function () {
             },
             success: function (result) {
                 $("#list").append(`
-                <li class="member" data-member-id=${result.id}>
-                    <span class="name">${result.name}</span>
+                <li class="member" data-member-id=${result}>
+                    <span class="name">${newcomerName}</span>
                     <span class="delete fa fa-remove"></span>
                     <span class="pencil fa fa-pencil"></span>
                 </li>`

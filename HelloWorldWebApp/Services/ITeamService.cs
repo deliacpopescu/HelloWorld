@@ -1,4 +1,5 @@
 ﻿using HelloWorldWebApp.Models;
+using System;
 
 namespace HelloWorldWebApp.Services
 {
@@ -6,7 +7,7 @@ namespace HelloWorldWebApp.Services
     {
         TeamInfo GetTeamInfo();
 
-        Member AddTeamMember(Member member);
+        int AddTeamMember(string name);
 
         Member UpdateTeamMember(Member member);
 

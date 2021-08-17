@@ -1,4 +1,5 @@
 ﻿using HelloWorldWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,7 +15,7 @@ namespace HelloWorldWebApp.Services
             {
                 TeamName = "name",
                 TeamMembers = new List<Member>()
-                    { new Member("Gabi", 1), new Member("Delia", 2), new Member("Rares", 3), new Member("Catalin", 4) }
+                    { new Member(1, "Gabi"), new Member(2, "Delia"), new Member(3, "Rares"), new Member(4, "Catalin") }
             };
         }
 
@@ -23,12 +24,12 @@ namespace HelloWorldWebApp.Services
             return teamInfo;
         }
 
-        public Member AddTeamMember(Member member)
+        public int AddTeamMember(string name)
         {
-            int id = teamInfo.TeamMembers.Max(member => member.Id);
-            member.Id = id + 1;
+            int id = teamInfo.TeamMembers.Max(member => member.Id) + 1;
+            Member member = new Member(id, name);
             teamInfo.TeamMembers.Add(member);
-            return member;
+            return id;
         }
 
         public Member UpdateTeamMember(Member member)

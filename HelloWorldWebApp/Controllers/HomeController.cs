@@ -29,18 +29,17 @@ namespace HelloWorldWebApp.Controllers
         }
 
         [HttpPost]
-        public Member AddTeamMember(string name)
+        public int AddTeamMember(string name)
         {
-            Member member = new Member(name);
-            member = this.teamService.AddTeamMember(member);
-            return member;
+            int id = this.teamService.AddTeamMember(name);
+            return id;
         }
 
 
         [HttpPut]
         public Member UpdateTeamMember(int id, string name)
         {
-            Member member = new Member(name, id);
+            Member member = new Member(id, name);
             member = this.teamService.UpdateTeamMember(member);
             return member;
         }
