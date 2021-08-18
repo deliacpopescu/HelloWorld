@@ -33,7 +33,7 @@ namespace HelloWorldWebApp
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("PostgresConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -73,6 +73,17 @@ namespace HelloWorldWebApp
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+        }
+
+        public static string ConvertHerokuStringToAspNetString(string herokuConnectionString)
+        {
+            var databaseUri = new Uri(herokuConnectionString);
+            var dataBaseUriArray = databaseUri.UserInfo;
+           
+            var databaseUriUsername = dataBaseUriArray.Split(":")[0];
+            var databaseUriPassword = dataBaseUriArray.Split(":")[1];
+            var databaseName=databaseUri.LocalPath.TrimStart('/');
+            return $"Host={databaseUri.Host};Port={databaseUri.Port};Database={databaseName};User Id={databaseUriUsername};Password={databaseUriPassword};Pooling=true;SSL Mode=Require;TrustServerCertificate=True";
         }
     }
 }
