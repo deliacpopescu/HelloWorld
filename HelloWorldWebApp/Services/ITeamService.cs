@@ -7,7 +7,7 @@ namespace HelloWorldWebApp.Services
     {
         TeamInfo GetTeamInfo();
 
-        int AddTeamMember(string name);
+        int AddTeamMember(Member member);
 
         Member UpdateTeamMember(Member member);
 

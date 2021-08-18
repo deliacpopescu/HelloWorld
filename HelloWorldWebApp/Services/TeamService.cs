@@ -45,5 +45,13 @@ namespace HelloWorldWebApp.Services
             Member member = teamInfo.TeamMembers.Single(r => r.Id == id);
             teamInfo.TeamMembers.Remove(member);
         }
+
+        public int AddTeamMember(Member member)
+        {
+            int id = teamInfo.TeamMembers.Max(member => member.Id) + 1;
+            member.Id = id;
+            teamInfo.TeamMembers.Add(member);
+            return id;
+        }
     }
 }

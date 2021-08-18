@@ -30,8 +30,10 @@ namespace HelloWorldWebApp.Controllers
 
         [HttpPost]
         public int AddTeamMember(string name)
+
         {
-            int id = this.teamService.AddTeamMember(name);
+            Member member = new Member(name);
+            int id = this.teamService.AddTeamMember(member);
             return id;
         }
 

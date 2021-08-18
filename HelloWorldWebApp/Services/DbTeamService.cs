@@ -46,5 +46,12 @@ namespace HelloWorldWebApp.Services
             _context.Members.Remove(member);
             _context.SaveChanges();
         }
+
+        public int AddTeamMember(Member member)
+        {
+            _context.Add(member);
+            _context.SaveChanges();
+            return member.Id;
+        }
     }
 }
