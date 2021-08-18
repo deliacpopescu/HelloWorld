@@ -1,5 +1,4 @@
 ﻿using HelloWorldWebApp.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,18 +23,16 @@ namespace HelloWorldWebApp.Services
             return teamInfo;
         }
 
-        public int AddTeamMember(string name)
+        public int AddTeamMember(Member member)
         {
             int id = teamInfo.TeamMembers.Max(member => member.Id) + 1;
-            Member member = new Member(id, name);
+            member.Id = id;
             teamInfo.TeamMembers.Add(member);
             return id;
         }
 
         public Member UpdateTeamMember(Member member)
         {
-            // List<Member> teamMembers = teamInfo.TeamMembers.Select(r => { if (r.Id == member.Id) { r = member; }; return r; }).ToList();
-            // teamInfo.TeamMembers = teamMembers;
             teamInfo.TeamMembers.ForEach(r => { if (r.Id == member.Id) { r.Name = member.Name; }; });
             return member;
         }
@@ -44,14 +41,6 @@ namespace HelloWorldWebApp.Services
         {
             Member member = teamInfo.TeamMembers.Single(r => r.Id == id);
             teamInfo.TeamMembers.Remove(member);
-        }
-
-        public int AddTeamMember(Member member)
-        {
-            int id = teamInfo.TeamMembers.Max(member => member.Id) + 1;
-            member.Id = id;
-            teamInfo.TeamMembers.Add(member);
-            return id;
         }
     }
 }

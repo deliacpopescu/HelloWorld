@@ -1,9 +1,6 @@
 ﻿using HelloWorldWebApp.Data;
 using HelloWorldWebApp.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace HelloWorldWebApp.Services
 {
@@ -23,10 +20,10 @@ namespace HelloWorldWebApp.Services
             return teamInfo;
         }
 
-        public int AddTeamMember(string name)
+        public int AddTeamMember(Member member)
         {
             int id = _context.Members.Max(member => member.Id) + 1;
-            Member member = new Member(id, name) { Name = name };
+            member.Id = id;
             _context.Add(member);
             _context.SaveChanges();
             return member.Id;
@@ -45,15 +42,6 @@ namespace HelloWorldWebApp.Services
             Member member = _context.Members.Find(id);
             _context.Members.Remove(member);
             _context.SaveChanges();
-        }
-
-        public int AddTeamMember(Member member)
-        {
-            
-            _context.Add(member);
-            //int id = _context.Members.Max(member => member.Id) + 1;
-            _context.SaveChanges();
-            return member.Id;
         }
     }
 }
