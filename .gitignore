@@ -387,3 +387,5 @@ FodyWeavers.xsd
 .idea/
 *.sln.iml
 {"mode":"full","isActive":false}
+
+HelloWorldWebApp/appsettings*.json
