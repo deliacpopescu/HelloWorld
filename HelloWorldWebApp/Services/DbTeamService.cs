@@ -49,7 +49,9 @@ namespace HelloWorldWebApp.Services
 
         public int AddTeamMember(Member member)
         {
+            
             _context.Add(member);
+            //int id = _context.Members.Max(member => member.Id) + 1;
             _context.SaveChanges();
             return member.Id;
         }
