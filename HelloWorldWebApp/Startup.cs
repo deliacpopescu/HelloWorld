@@ -54,6 +54,7 @@ using HelloWorldWebApp.Controllers;
             services.AddSingleton<ITeamService>(new TeamService());
             services.AddSingleton<ITimeService>(new TimeService());
             services.AddSingleton<IWeatherService>(new WeatherService());
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -89,6 +90,10 @@ using HelloWorldWebApp.Controllers;
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+
+                endpoints.MapHub<MessageHub>("/messagehub");
+
+
             });
         }
     }
