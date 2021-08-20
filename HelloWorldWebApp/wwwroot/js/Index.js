@@ -2,6 +2,22 @@
 $(document).ready(function () {
     // see https://api.jquery.com/click/
 
+    var connection = new signalR.HubConnectionBuilder().withUrl("/messagehub").build();
+
+    connection.on("NewTeamMemberAdded", function (member, id) {
+        console.log(`New team member added:${JSON.stringify(member, null, 2)}, ${id}`);
+        createNewcomer(member)
+
+    });
+
+    connection.start().then(function () {
+        console.log('Connection Started')
+
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+
     $('#nameField').on('keyup', function () {
         var empty = false;
 
@@ -96,4 +112,18 @@ $(document).ready(function () {
             }
         })
     });
+
+  
+        function createNewcomer(member) {
+            // Remember string interpolation
+            $("#list").append(`<li class="member" data-member-id="${member.id}">
+                <span class="name">${member.name}</span>
+                <span class="delete fa fa-remove"></span>
+                <span class="pencil fa fa-pencil"></span>
+            </li>`);
+        }
+       /* $("#clear").click(function () {
+            $("#newcomer").val("");
+        })
+        */
 });

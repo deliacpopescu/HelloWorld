@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HelloWorldWebApp
 {
-    internal class MessageHub : Hub
+    public class MessageHub : Hub
     {
         public async Task SendMessage(string user, string message)
         {

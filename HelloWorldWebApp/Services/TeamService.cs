@@ -1,4 +1,5 @@
 ﻿using HelloWorldWebApp.Models;
+using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,16 +9,24 @@ namespace HelloWorldWebApp.Services
     {
         private readonly TeamInfo teamInfo;
         private readonly TimeService timeService;
+        private readonly IHubContext<MessageHub> messageHub;
 
-        public TeamService()
+        public TeamService(IHubContext<MessageHub> messageHubContext)
         {
             teamInfo = new TeamInfo
             {
                 TeamName = "name",
                 TeamMembers = new List<Member>()
-                    { new Member(1, "Gabi", timeService), new Member(2, "Delia", timeService), new Member(3, "Rares", timeService), new Member(4, "Catalin", timeService) }
+                { new Member(1, "Gabi", timeService),
+                    new Member(2, "Delia", timeService),
+                    new Member(3, "Rares", timeService),
+                    new Member(4, "Catalin", timeService)
+                }
+           
             };
+            this.messageHub = messageHubContext;
         }
+
 
         public TeamInfo GetTeamInfo()
         {
@@ -26,9 +35,10 @@ namespace HelloWorldWebApp.Services
 
         public Member AddTeamMember(Member member)
         {
-            int id = teamInfo.TeamMembers.Max(member => member.Id);
-            member.Id = id + 1;
+            int id = teamInfo.TeamMembers.Max(member => member.Id)+ 1 ;
+            member.Id = id ;
             teamInfo.TeamMembers.Add(member);
+            messageHub.Clients.All.SendAsync("NewTeamMemberAdded", member);
             return member;
         }
 
